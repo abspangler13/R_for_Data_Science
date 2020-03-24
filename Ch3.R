@@ -59,3 +59,117 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = class, y = hwy, size = displ, color = displ))
 #it works
 
+#5
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = class, y = hwy, color = displ), stroke = 1)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = class, y = hwy, color = displ), stroke = 1)
+
+#stroke controls the size of the border of the point apparently. 
+#https://ggplot2.tidyverse.org/reference/geom_point.html
+
+#6
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = class, y = hwy, color = displ< 5))
+
+#it colors the points based on whether displ < 5 is true or false
+
+###3.5.1
+
+#1
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = class, y = displ)) + 
+  facet_grid(.~ hwy)
+#you get a separate facet for each number. 
+
+#2
+#The empty cells mean there's no datat for rear wheel drive for
+# 4 and 5 cylinder cars and there's no 5 cylinder 4 wheel drive car
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = drv, y = cyl))
+
+#3
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+#it means that you don't make column facets, just rows 
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+#it means that you don't make row facets, just columns
+
+#4
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)
+
+#keeps you from having too many data points on a single plot 
+
+#5
+?facet_wrap
+#nrow sets number of rows. ncol sets number of columns 
+
+p <- ggplot(mpg, aes(displ, cty)) + geom_point()
+p + facet_grid(rows = vars(drv))
+p + facet_grid(cols = vars(cyl))
+p + facet_grid(vars(drv), vars(cyl))
+
+
+###3.6.1
+
+#1
+#geom_line, geom_histogram  geom_boxplot
+#https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+
+#3 
+#removes the legend. the plot gets bigger. 
+
+#4
+?geom_smooth
+#tells ggplot whether or not to display the confidence interval around smooth
+
+#5
+#no because all the aesthetic mappings are the same
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+
+ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
+
+
+#6
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(size = 5) + 
+  geom_smooth(se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(size = 5) + 
+  geom_smooth(mapping = aes(group = drv), se = FALSE)
+#OR
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, group = drv)) + 
+  geom_point(size = 5) + 
+  geom_smooth(se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+  geom_point(size = 5) + 
+  geom_smooth(se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = drv),size = 5) + 
+  geom_smooth(se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, group = drv)) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = drv),size = 5) + 
+  geom_smooth(se = FALSE)
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(x = displ, y = hwy, fill = drv),color = "white",size = 5,pch=21, stroke = 4)
+
+
+
+
