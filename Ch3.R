@@ -217,7 +217,53 @@ ggplot(data = diamonds) +
 
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, fill = color, y = ..prop..))
-# the problem is that all the proportions are equal to 1. 
+# the problem is that all the proportions are equal to 1 because they are calculated 
+# within the groups instead of across all groups. 
 
+
+###3.8
+# position = jitter adds random noise to the data points they're not sitting on top
+# each other
+
+#3.8.1
+
+#1
+ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
+  geom_point(position = "jitter")
+
+#2
+?geom_jitter
+#width and height
+
+#3
+?geom_count
+#geom_count sums the number of value with the same x,y position and makes the size
+# of the point according to this count. this way you can see where there are multiple
+# data points withough adding noise to the data. 
+
+#4
+?geom_boxplot
+dodge2
+
+ggplot(data = mpg, mapping = aes(x = drv, y = hwy, colour = class)) + 
+  geom_boxplot()
+
+#why doesn't group = class work here?
+
+###3.9
+
+ggplot(mpg, aes(x = factor(1), fill = drv)) +
+  geom_bar()
+
+###3.10
+
+# ggplot(data = <DATA>) + 
+#   <GEOM_FUNCTION>(
+#     mapping = aes(<MAPPINGS>),
+#     stat = <STAT>, 
+#     position = <POSITION>
+#   ) +
+#   <COORDINATE_FUNCTION> +
+#   <FACET_FUNCTION>
 
 
