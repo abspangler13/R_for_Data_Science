@@ -171,5 +171,53 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
   geom_point(mapping = aes(x = displ, y = hwy, fill = drv),color = "white",size = 5,pch=21, stroke = 4)
 
 
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(fill = drv),color = "white",size = 5,pch=21, stroke = 4)
+
+###3.7.1
+
+# You can usually use geoms and stats interchangeably because each geome has a default
+# stat. 
+
+#1
+
+
+#geom_pointrange()
+
+ggplot(data = diamonds) + 
+  geom_pointrange(
+    mapping = aes(x = cut, y = depth),
+    stat = "summary",
+    fun.ymin = min,
+    fun.ymax = max,
+    fun.y = median)+
+  ylim(40,80)
+
+ggplot(data = diamonds) +
+  geom_pointrange(
+    mapping = aes(x = cut, y = depth),
+    stat = "summary",
+    fun.ymin = min,
+    fun.ymax = max,
+    fun.y = median
+  )
+# literally copied the answer from the solutions manual and it doesn't work either. 
+# to get this to work I think you would have to calculate the SD by hand and plot it
+
+#2
+# geom_bar uses the number of cases in each group. geom_col uses the actual values. 
+  
+#4
+?stat_smooth
+#computes: y, ymin, ymax, se
+
+#5
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, y = ..prop..))
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = color, y = ..prop..))
+# the problem is that all the proportions are equal to 1. 
+
 
 
