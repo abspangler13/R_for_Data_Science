@@ -39,4 +39,5 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = class, y = hwy, color = displ))
 ```
 
-![](myRmd_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](myRmd_files/figure-html/unnamed-chunk-1-2.png)<!-- -->
+
