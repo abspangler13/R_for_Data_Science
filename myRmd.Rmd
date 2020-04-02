@@ -10,3 +10,7 @@ library(tidyverse)
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, color = year))
 ```
+```{r}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = class, y = hwy, color = displ))
+```
